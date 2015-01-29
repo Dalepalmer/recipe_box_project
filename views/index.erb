@@ -1,0 +1,60 @@
+<h1>Your Mom's Favorite Recipes To Make Me</h1>
+
+<h2>SELECT ONE RECIPE</h2>
+<% if @recipes.any? %>
+  <% @recipes.each() do |recipe| %>
+  <form action="/ingredients_recipes_add" method="post">
+  <div class="checkbox">
+      <label>
+          <input type="checkbox" id="recipe_id" name="recipe_id" value="<%= recipe.id() %>">
+          <a href= "/recipes/<%= recipe.id() %>"><%= recipe.name() %></a>
+      </label>
+  </div>
+  <% end %>
+
+<% else %>
+
+  No recipes in the box yet.
+
+<% end %>
+
+<h2>SELECT AT LEAST ONE INGREDIENT</h2>
+<% if @ingredients.any? %>
+      <% @ingredients.each() do |ingredient| %>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" id="ingredient_ids_array[]" name="ingredient_ids_array[]" value="<%= ingredient.id() %>">
+                <%= ingredient.ingredient_name() %>
+            </label>
+        </div>
+        <% end %>
+      <button type="submit" class="btn btn-primary">Add ingredients to the choosen recipe</button>
+    </form>
+
+<% else %>
+
+  No ingredients in the pantry yet.
+
+<% end %>
+
+<br>
+<br>
+
+
+<p><u>Create a new recipe:</u></p>
+
+<form action="/recipes" method="post">
+  <label for="name">Recipe name:</label>
+  <input type="text" name="name" id="name" placeholder="Chili">
+  <button class="button" type="submit">Add recipe</button>
+</form>
+
+<br>
+
+<p><u>Add a new ingredient:</u></p>
+
+<form action="/ingredients" method="post">
+  <label for="ingredient_name">Ingredient name:</label>
+  <input type="text" name="ingredient_name" id="ingredient_name" placeholder="Red onion">
+  <button class="button" type="submit">Add ingredient</button>
+</form>

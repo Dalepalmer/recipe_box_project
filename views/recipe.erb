@@ -1,0 +1,21 @@
+<h1> <%= @recipe.name() %> </h1>
+
+<% if @ingredients.any? %>
+  <% @ingredients.each() do |ingredient| %>
+  <li><a href="/ingredients/<%=ingredient.id()%>"> <%= ingredient.ingredient_name() %></a></li>
+  <% end %>
+
+<% else %>
+
+  No ingredients for this recipe yet.
+
+<% end %>
+
+<br>
+
+<form action="/ingredients" method="post">
+
+  <label for="ingredient_name">Ingredient name:</label>
+  <input type="text" name="ingredient_name" id="ingredient_name" placeholder="Black Beans">
+  <button class="success" type="submit">Add an ingredient to this recipe.</button>
+</form>
