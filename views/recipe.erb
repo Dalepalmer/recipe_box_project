@@ -1,4 +1,8 @@
 <h1> <%= @recipe.name() %> </h1>
+<h2> Category: <% @categories.each() do |category| %>
+<li> <%= category.name() %> </li>
+<% end %>
+</h2>
 
 <% if @ingredients.any? %>
   <% @ingredients.each() do |ingredient| %>

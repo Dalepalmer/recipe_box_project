@@ -4,9 +4,9 @@
 <% if @recipes.any? %>
   <% @recipes.each() do |recipe| %>
   <form action="/ingredients_recipes_add" method="post">
-  <div class="checkbox">
+  <div class="radio">
       <label>
-          <input type="checkbox" id="recipe_id" name="recipe_id" value="<%= recipe.id() %>">
+          <input type="radio" id="recipe_id" name="recipe_id" value="<%= recipe.id() %>">
           <a href= "/recipes/<%= recipe.id() %>"><%= recipe.name() %></a>
       </label>
   </div>
@@ -24,7 +24,7 @@
         <div class="checkbox">
             <label>
                 <input type="checkbox" id="ingredient_ids_array[]" name="ingredient_ids_array[]" value="<%= ingredient.id() %>">
-                <%= ingredient.ingredient_name() %>
+                  <a href="/ingredients/<%= ingredient.id %>"><%= ingredient.ingredient_name() %></a>
             </label>
         </div>
         <% end %>
@@ -37,6 +37,43 @@
 
 <% end %>
 
+<br>
+
+<% if @recipes.any? %>
+  <% @recipes.each() do |recipe| %>
+  <form action="/categories_recipes_add" method="post">
+  <div class="radio">
+      <label>
+          <input type="radio" id="recipe_id" name="recipe_id" value="<%= recipe.id() %>">
+          <a href= "/recipes/<%= recipe.id() %>"><%= recipe.name() %></a>
+      </label>
+  </div>
+  <% end %>
+
+<% else %>
+
+  No recipes in the box yet.
+
+<% end %>
+
+<h2>SELECT AT LEAST ONE CATEGORY</h2>
+<% if @categories.any? %>
+      <% @categories.each() do |category| %>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" id="category_id" name="category_id" value="<%=category.id() %>">
+                <%= category.name() %>
+            </label>
+        </div>
+        <% end %>
+      <button type="submit" class="btn btn-danger">Add categories to associate with the choosen recipe</button>
+    </form>
+
+<% else %>
+
+  No categories listed yet.
+
+<% end %>
 <br>
 <br>
 
@@ -57,4 +94,13 @@
   <label for="ingredient_name">Ingredient name:</label>
   <input type="text" name="ingredient_name" id="ingredient_name" placeholder="Red onion">
   <button class="button" type="submit">Add ingredient</button>
+</form>
+
+<br>
+
+<p><u>Add a new category:</u></p>
+<form action="/category" method="post">
+  <label for="category_name">Category name:</label>
+  <input type="text" name="category_name" id="Category_name" placeholder="Paleo">
+  <button class="button" type="submit">Add a category</button>
 </form>

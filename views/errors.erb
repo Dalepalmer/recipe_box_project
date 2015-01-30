@@ -1,0 +1,8 @@
+<h2> Oops there was a mix-up: </h2>
+<ul>
+  <% @recipe.errors().full_messages().each() do |message| %>
+    <li><%= message %></li>
+  <% end %>
+</ul>
+
+<h4><a href="/" > Return to main page to try again</a></h4>
